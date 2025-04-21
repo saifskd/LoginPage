@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="login-container">
+    <form id="loginForm">
+      <h2>Login</h2>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+        <small class="error" id="emailError"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required minlength="6"/>
+        <small class="error" id="passwordError"></small>
+      </div>
+
+      <button type="submit">Login</button>
+
+      <p id="statusMessage"></p>
+    </form>
+  </div>
+
+  <script>
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // Clear previous errors
+  document.getElementById("emailError").textContent = "";
+  document.getElementById("passwordError").textContent = "";
+  document.getElementById("statusMessage").textContent = "";
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  let hasError = false;
+
+  if (!email.includes("@")) {
+    document.getElementById("emailError").textContent = "Invalid email format";
+    hasError = true;
+  }
+
+  if (password.length < 6) {
+    document.getElementById("passwordError").textContent = "Password must be at least 6 characters";
+    hasError = true;
+  }
+
+  if (!hasError) {
+    document.getElementById("statusMessage").textContent = "Login successful! Redirecting...";
+    document.getElementById("statusMessage").style.color = "green";
+
+    // Redirect after a short delay
+    setTimeout(() => {
+      window.location.href = "https://saifskd.github.io/my-portfolio/";
+    }, 1500);
+  } else {
+    document.getElementById("statusMessage").textContent = "Please fix the errors above.";
+    document.getElementById("statusMessage").style.color = "red";
+  }
+});
+  </script>
+</body>
+</html>
